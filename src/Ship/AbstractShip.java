@@ -7,6 +7,15 @@ public class AbstractShip {
 	public int SizeNavire;
 	public Orientation OrientationNavire;
 	
+	// enum est plus meilleur pour représenter cette information
+	public enum Orientation{
+		  
+	    North,
+	    South,
+	    East,
+	    West
+	}
+	
 	AbstractShip(String name, String label, int size, Orientation orient) {
 		this.NameTypeNavire = name;
 		this.TypeNavire = label;
@@ -14,12 +23,4 @@ public class AbstractShip {
 		this.OrientationNavire = orient;
 	}
 	
-}
-
-enum Orientation{
-	  
-    North,
-    South,
-    East,
-    West
 }
