@@ -1,5 +1,7 @@
 package Board;
 
+import java.util.NoSuchElementException;
+
 import Ship.AbstractShip;
 
 public interface IBoard { 
@@ -40,5 +42,51 @@ public interface IBoard {
      * @param y
      * @return true if the hit is successful
      */
-    boolean getHit(int x, int y);
+    //boolean getHit(int x, int y);
+    // BattleShipsAI.java nous avons la methode "private boolean isUndiscovered(int x, int y)"
+    // que verifie si getHit == null. C'est possible si Boolean(true, false, null)
+    Boolean getHit(int x, int y);
+    
+    public enum Hit {
+        MISS(-1, "manqué"),
+        STIKE(-2, "touché"),
+        DESTROYER(2, "Frégate"),
+        SUBMARINE(3, "Sous-marin"),
+        BATTLESHIP(4, "Croiseur"),
+        CARRIER(5, "Porte-avion");
+
+        /* ***
+         * Attributs
+         */
+        private int value;
+        private String label;
+
+        /* ***
+         * Constructeur
+         */
+        Hit(int value, String label) {
+            this.value = value;
+            this.label = label;
+        }
+
+        /* ***
+         * Méthodes
+         */
+        public static Hit fromInt(int value) {
+            for (Hit hit : Hit.values()) {
+                if (hit.value == value) {
+                    return hit;
+                }
+            }
+            throw new NoSuchElementException("no enum for value " + value);
+        }
+
+        public String toString() {
+            return this.label;
+        }
+    };
+    
+    Hit sendHit(int x, int y);
 }
+
+
